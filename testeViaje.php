@@ -1,5 +1,5 @@
 <?php
-include "viajes.php";
+include "viaje.php";
 $arrayPasajeros = [];
 $arrayPasajeros[0] = ["nombre"=>"JUAN", "apellido" => "ZAPATA" , "DNI"=> 45987237];
 $arrayPasajeros[1] = ["nombre"=>"PABLO", "apellido" => "GONZALES" , "DNI"=> 22428491];
