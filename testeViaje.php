@@ -17,10 +17,8 @@ $p = $objViaje->getObjPasajeros();
 
 do {    
     $limite = count($objViaje->getObjPasajeros());
-    //El echo va a imorimir en pantalla los datos del viaje como el codigo, destino y el total de los pasajeros
-    echo $objViaje;//
     
-    echo "\n__MENU__ \nIngrese la opcion quiera realizar: \n1 _ Registrar un nuevo pasajero \n2 _ Modificar datos del viaje \n3 _ Ver los datos de los pasajeros \n4 _ Ver datos del responsable \n5 _ Salir \nOPCION: ";
+    echo "\n__MENU__ \nIngrese la opcion quiera realizar: \n1 _ Registrar un nuevo pasajero \n2 _ Modificar datos del viaje \n3 _ Ver los datos de los pasajeros \n4 _ Ver datos del responsable \n5 _ Datos del viaje \n6 _ Salir \nOPCION: ";
     $operando = trim(fgets(STDIN));
 
     switch ($operando) {
@@ -132,10 +130,13 @@ do {
             echo "Los datos del responsable son: ".  $datosResponsable;
         break;
         case 5:
+            echo $objViaje;
+        break;
+        case 6:
             echo "Fin del programa";
         break;
     
     }
-} while ($operando != 5 );
+} while ($operando != 6 );
 
 ?>

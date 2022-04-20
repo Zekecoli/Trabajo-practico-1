@@ -6,6 +6,7 @@
         private $objArrayPasajeros = [];
         private $objResponsable;
 
+        //Metodo construc
         public function __construct($destino,$cantidadMax,$codigo,$objArrayPasajeros,$objResponsable){
             $this->destino = $destino;
             $this->cantidadMax = $cantidadMax;
@@ -60,6 +61,7 @@
             $this->objResponsable = $resposable;
         }
 
+
         //Metodo para agregar a un pasajero y vereficar si no esta anotado 
         public function agregarPasajero($newPasajero){
             $verificacion = "";
@@ -78,13 +80,15 @@
            return $verificacion;
         }
 
-        //Metodo para cambiar los datos de una persona
+
+        //Metodo para cambiar los datos de un pasajero
         public function cambiarDatos($valor,$cambioDatos){
             $arrayModificado = $this->getObjPasajeros();
             $valor = $valor - 1;
             $arrayModificado[$valor] = $cambioDatos;
             $this->setObjPasajeros($arrayModificado);
         }
+
 
         //Metodo para eliminar a un pasajero
         public function eliminarPasajero($valor){
@@ -104,6 +108,7 @@
             }
             return $verificacion;
         }
+
 
         //Metodo para saber los datos del pasajero seleccionado
         public function datosPasajero($valor){
@@ -126,12 +131,24 @@
             $datos = "\nNombre: ". $nombreResponsable. "\nApellido: ". $apellidoResponsable. "\nNumero de empleado: ". $numEmpleado. "\nNumero de licencia: ". $numLicencia;
             return $datos;
         }
+
+
         //Metodo tostring
         public function __toString()
         {
             $encargado = $this->getObjResponsable();
             return "\nDatos el viaje: \nCodigo del viaje: ". $this->getCodigo(). "\nDestino: ". $this->getDestino(). "\nNumero de pasajeros: ". count($this->getObjPasajeros())."/". $this->getCantidadMax(). "\nResponsable: ". $encargado->getNombre()."\n";
         }
+
+        
+        //Metodo tostring con arreglo
+        //no supe hacer el tostring mas legible con el arreglo asi que hice un segundo tostring
+
+        /**public function __toString()
+        {
+            $encargado = $this->getObjResponsable();
+            return "\nDatos el viaje: \nCodigo del viaje: ". $this->getCodigo(). "\nDestino: ". $this->getDestino(). "\nNumero de pasajeros: ". count($this->getObjPasajeros())."/". $this->getCantidadMax(). "\nResponsable: ". $encargado->getNombre()."\n";
+        } */
     }
 
 ?>
