@@ -3,13 +3,15 @@
         private $destino;
         private $cantidadMax;
         private $codigo;
-        private $listaPasajeros;
+        private $objArrayPasajeros = [];
+        private $objResponsable;
 
-        public function __construct($destino,$cantidadMax,$codigo,$listaPasajeros){
+        public function __construct($destino,$cantidadMax,$codigo,$objArrayPasajeros,$objResponsable){
             $this->destino = $destino;
             $this->cantidadMax = $cantidadMax;
             $this->codigo = $codigo;
-            $this->listaPasajeros = $listaPasajeros;
+            array_push($this->objArrayPasajeros,$objArrayPasajeros);
+            $this->objResponsable = $objResponsable;
         }
 
         //Metodos getter
@@ -27,33 +29,108 @@
             return $this->codigo;
         }
 
-        public function getListaPasajeros(){
-            return $this->listaPasajeros;
+        public function getObjPasajeros(){
+            return $this->objArrayPasajeros;
+        }
+
+        public function getObjResponsable(){
+            return $this->objResponsable;
         }
 
         //Metodos setter
         //settear/colocar/cambiar el valor de los atributos
 
         public function setDestino($destino){
-            return $this->destino = $destino;
+            $this->destino = $destino;
         }
 
         public function setCantidadMaxima($maxima){
-            return $this->cantidadMax = $maxima;
+            $this->cantidadMax = $maxima;
         }
 
         public function setCodigo($codigo){
-            return $this->codigo = $codigo;
+            $this->codigo = $codigo;
         }
 
-        public function setListaPasajeros($lista){
-            return $this->listaPasajeros = $lista;
+        public function setObjPasajeros($ArrayPasajeros){
+            $this->objArrayPasajeros = $ArrayPasajeros;
         }
 
-        //Metodo restante
+        public function setObjResponsable($resposable){
+            $this->objResponsable = $resposable;
+        }
+
+        //Metodo para agregar a un pasajero y vereficar si no esta anotado 
+        public function agregarPasajero($newPasajero){
+            $verificacion = "";
+            foreach ($this->getObjPasajeros() as $key => $value) {
+                if ($newPasajero->getDocumento() == $value->getDocumento()) {
+                    $verificacion = "\nEl pasajero que quiere anotar ya esta registrado.";
+                }
+            }
+           if ($verificacion == "") {
+               $nuevaArray = $this->getObjPasajeros();
+               array_push($nuevaArray,$newPasajero);
+               $this->setObjPasajeros($nuevaArray);
+               $verificacion = "\nregistrado.";
+           }
+
+           return $verificacion;
+        }
+
+        //Metodo para cambiar los datos de una persona
+        public function cambiarDatos($valor,$cambioDatos){
+            $arrayModificado = $this->getObjPasajeros();
+            $valor = $valor - 1;
+            $arrayModificado[$valor] = $cambioDatos;
+            $this->setObjPasajeros($arrayModificado);
+        }
+
+        //Metodo para eliminar a un pasajero
+        public function eliminarPasajero($valor){
+            $arrayModificada = [];
+            $verificacion = "";
+            if (count($this->getObjPasajeros()) < $valor) {
+                $verificacion = "El numero ingresado no coicide con ningun pasajero.";
+            }else {
+                $valor = $valor - 1;
+                foreach ($this->getObjPasajeros() as $key => $value) {
+                    if ($valor != $key) {
+                        array_push($arrayModificada, $this->getObjPasajeros()[$key]);
+                        $this->setObjPasajeros($arrayModificada);
+                        $verificacion = "El pasajero se ha eliminado.";
+                    }
+                }
+            }
+            return $verificacion;
+        }
+
+        //Metodo para saber los datos del pasajero seleccionado
+        public function datosPasajero($valor){
+            $pasajero = "";
+            foreach ($this->getObjPasajeros() as $key => $value) {
+                if ($key == $valor) {
+                    $pasajero = "Nombre: ". $value->getNombre(). "\nApellido: ". $value->getApellido(). "\nDNI: ". $value->getDocumento(). "\nTelefono: ". $value->getTelefono();
+                }
+            }
+            return $pasajero;
+        }
+
+
+        //Metodo para saber los datos del responsable del viaje
+        public function datosResponsable(){
+            $nombreResponsable = $this->getObjResponsable()->getNombre();
+            $apellidoResponsable = $this->getObjResponsable()->getApellido();
+            $numEmpleado = $this->getObjResponsable()->getNumEmpleado();
+            $numLicencia = $this->getObjResponsable()-> getNumLicencia();
+            $datos = "\nNombre: ". $nombreResponsable. "\nApellido: ". $apellidoResponsable. "\nNumero de empleado: ". $numEmpleado. "\nNumero de licencia: ". $numLicencia;
+            return $datos;
+        }
+        //Metodo tostring
         public function __toString()
         {
-            return "\n\nCodigo del viaje: ". $this->getCodigo(). "\nDestino: ". $this->getDestino(). "\nNumero de pasajeros: ". count($this->getListaPasajeros())."/". $this->getCantidadMax()."\n";
+            $encargado = $this->getObjResponsable();
+            return "\nDatos el viaje: \nCodigo del viaje: ". $this->getCodigo(). "\nDestino: ". $this->getDestino(). "\nNumero de pasajeros: ". count($this->getObjPasajeros())."/". $this->getCantidadMax(). "\nResponsable: ". $encargado->getNombre()."\n";
         }
     }
 
