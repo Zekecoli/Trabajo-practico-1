@@ -89,13 +89,13 @@ do {
                         echo $verificacion;
                     break;
                     case 6:
-                        "Ingrese el nombre del responsable: ";
+                        echo "Ingrese el nombre del responsable: ";
                         $newNombre = strtoupper(trim(fgets(STDIN)));
-                        "Ingrese el apellido: ";
+                        echo "Ingrese el apellido: ";
                         $newApellido = strtoupper(trim(fgets(STDIN)));
-                        "Ingrese el numero de empleado: ";
+                        echo "Ingrese el numero de empleado: ";
                         $newNumeroEmpleado = trim(fgets(STDIN));
-                        "Ingrese el numero de licencia del empleado: ";
+                        echo "Ingrese el numero de licencia del empleado: ";
                         $newLicencia = trim(fgets(STDIN));
                         $ResponsableCambiado = new Responsable($newNumeroEmpleado,$newLicencia,$newNombre,$newApellido);
                         $objViaje->setObjResponsable($ResponsableCambiado);

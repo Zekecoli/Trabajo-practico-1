@@ -67,14 +67,14 @@
             $verificacion = "";
             foreach ($this->getObjPasajeros() as $key => $value) {
                 if ($newPasajero->getDocumento() == $value->getDocumento()) {
-                    $verificacion = "\nEl pasajero que quiere anotar ya esta registrado.";
+                    $verificacion = "\nEl pasajero que quiere anotar ya esta registrado.\n";
                 }
             }
            if ($verificacion == "") {
                $nuevaArray = $this->getObjPasajeros();
                array_push($nuevaArray,$newPasajero);
                $this->setObjPasajeros($nuevaArray);
-               $verificacion = "\nregistrado.";
+               $verificacion = "\nregistrado.\n";
            }
 
            return $verificacion;
@@ -128,7 +128,7 @@
             $apellidoResponsable = $this->getObjResponsable()->getApellido();
             $numEmpleado = $this->getObjResponsable()->getNumEmpleado();
             $numLicencia = $this->getObjResponsable()-> getNumLicencia();
-            $datos = "\nNombre: ". $nombreResponsable. "\nApellido: ". $apellidoResponsable. "\nNumero de empleado: ". $numEmpleado. "\nNumero de licencia: ". $numLicencia;
+            $datos = "\nNombre: ". $nombreResponsable. "\nApellido: ". $apellidoResponsable. "\nNumero de empleado: ". $numEmpleado. "\nNumero de licencia: ". $numLicencia."\n";
             return $datos;
         }
 
